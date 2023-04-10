@@ -1,0 +1,13 @@
+﻿@using Excubo.Blazor.Canvas
+<h6>Previous (Iteration Start)</h6>
+<div class="row">
+    <Canvas @ref="@AppState.PreviousCanvas"
+            width="@AppState.CanvasSettings.Width"
+            height="@AppState.CanvasSettings.Height" />
+</div>
+<h6>Current (Iteration End)</h6>
+<div class="row">
+    <Canvas @ref="@AppState.CurrentCanvas"
+            width="@AppState.CanvasSettings.Width"
+            height="@AppState.CanvasSettings.Height" />
+</div>

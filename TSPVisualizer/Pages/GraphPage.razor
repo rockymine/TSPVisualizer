@@ -1,5 +1,58 @@
-﻿@page "/"
-@layout MainLayout
+﻿@*@page "/"*@
+<!-- Algorithm Settings -->
+<!-- Heuristic Settings -->
+<!-- Canvas Settings -->
+<!-- Graph Settings -->
+@using TSPVisualizer.Components
+@using TSPVisualizer.Algorithms.NearestNeighbor
 
-<PageTitle>Graph Page</PageTitle>
-
+<div class="container-fluid">
+    <div class="row gx-3">
+        <div class="col-md-2">
+            <div class="bg-custom-light custom-colum-style">
+                <div class="custom-input-group">
+                    <h5 class="font-weight-bold settings">Algorithm Settings</h5>
+                    @*<AlgorithmSettingsComponent @bind-Algorithm="AppState.Algorithm" />*@
+                </div>
+                <hr class="custom-hr" />
+                <div class="custom-input-group">
+                    <h5 class="font-weight-bold settings">Heuristic Settings</h5>
+                    @*@if (AppState.Algorithm is NearestNeigborAlgorithm && AppState.AlgorithmParameter is NearestNeighborAlgorithmParameter) {
+                        
+                    }*@
+                </div>
+                <hr class="custom-hr" />
+                <div class="custom-input-group">
+                    <h5 class="font-weight-bold settings">Canvas Settings</h5>
+                    <CanvasDisplaySettingsComponent @bind-NodeRadius="AppState.VisualSettings.NodeRadius"
+                                                    @bind-ShowGrid="AppState.CanvasSettings.ShowGrid"
+                                                    @bind-AnnotateEdges="AppState.VisualSettings.AnnotateEdges"
+                                                    @bind-ColorizeChanges="AppState.VisualSettings.ColorizeChanges"
+                                                    @bind-AnimationDelay="AppState.VisualSettings.AnimationDelay" />
+                </div>
+                <hr class="custom-hr" />
+                <div class="custom-input-group">
+                    <h5 class="font-weight-bold settings">Graph Settings</h5>
+                    <GraphSettingsComponent @bind-MaxX="AppState.GraphSettings.MaxX"
+                                            @bind-MaxY="AppState.GraphSettings.MaxY"
+                                            @bind-NodeCount="AppState.GraphSettings.NodeCount" />
+                    <div class="d-grid gap-2 mx-auto" style="margin-top: 0.5rem;">
+                        <button class="btn btn-primary" type="button" @onclick="e => InitiateParameters()">Execute</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="custom-input-group">
+                <h5 class="font-weight-bold settings">Visualization Control</h5>
+                <ControlClusterComponent @ref=ClusterComponent />
+            </div>
+            <button @onclick="e => DisplayComponent.Redraw()"></button>
+            <div class="custom-input-group">
+                <h5 class="font-weight-bold settings">Graph View</h5>
+                <GraphDisplayComponent @ref=DisplayComponent />
+            </div>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+</div>

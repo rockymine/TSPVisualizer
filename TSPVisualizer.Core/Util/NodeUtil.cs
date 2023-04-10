@@ -3,7 +3,6 @@
 namespace TSPVisualizer.Core.Util;
 
 public static class NodeUtil {
-
     public static Node? FindShortest(Node node, HashSet<Node> visited) {
         Node? closest = null;
         var closestDistance = double.MaxValue;
@@ -21,5 +20,10 @@ public static class NodeUtil {
         }
 
         return closest;
+    }
+
+    public static IEnumerable<Edge> FindPathEdges(GraphPath path) {
+        for (var i = 0; i < (path.IsClosed ? path.Path.Count : path.Path.Count - 1); i++)
+            yield return path.Path[i].EdgeTo(path.Path[(i + 1) % path.Path.Count]);
     }
 }

@@ -7,8 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Excubo.Blazor.Canvas" Version="3.2.18" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.4" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TSPVisualizer.Algorithms.NearestNeighbor\TSPVisualizer.Algorithms.NearestNeighbor.csproj" />
+    <ProjectReference Include="..\TSPVisualizer.Core\TSPVisualizer.Core.csproj" />
   </ItemGroup>
 
 </Project>

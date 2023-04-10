@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using TSPVisualizer.Algorithms.NearestNeighbor;
 using TSPVisualizer.Core;
+using TSPVisualizer.Core.Util;
 
 namespace TSPVisualizer.Tests.Algorithms.NearestNeighbor;
 
@@ -38,7 +39,7 @@ public class NearestNeighborTest {
 
     [TestMethod]
     public void ClosesPathCorrectly() {
-        //Arrange: Create what you want to test.
+        //Arrange
         var initialState = new GraphState { Graph = CreateGraph() };
         var algorithm = new NearestNeigborAlgorithm();
         var algorithmParameters = new NearestNeighborAlgorithmParameter { Start = initialState.Graph.Nodes[0] };
@@ -47,12 +48,12 @@ public class NearestNeighborTest {
         var lastState = algorithm.Solve(initialState, algorithmParameters);
 
         //Assert
-        Assert.AreEqual(true, lastState.IsClosed);
+        Assert.AreEqual(true, lastState.Path.IsClosed);
     }
 
     [TestMethod]
     public void SolvesPathCorrectly() {
-        //Arrange: Create what you want to test.
+        //Arrange
         var initialState = new GraphState { Graph = CreateGraph() };
         var algorithm = new NearestNeigborAlgorithm();
         var algorithmParameters = new NearestNeighborAlgorithmParameter { Start = initialState.Graph.Nodes[0] };
@@ -61,9 +62,9 @@ public class NearestNeighborTest {
         var lastState = algorithm.Solve(initialState, algorithmParameters);
 
         //Assert
-        Assert.AreEqual(0, lastState.Path[0].Index);
-        Assert.AreEqual(1, lastState.Path[1].Index);
-        Assert.AreEqual(2, lastState.Path[2].Index);
-        Assert.AreEqual(3, lastState.Path[3].Index);
+        Assert.AreEqual(0, lastState.Path.Path[0].Index);
+        Assert.AreEqual(1, lastState.Path.Path[1].Index);
+        Assert.AreEqual(2, lastState.Path.Path[2].Index);
+        Assert.AreEqual(3, lastState.Path.Path[3].Index);
     }
 }

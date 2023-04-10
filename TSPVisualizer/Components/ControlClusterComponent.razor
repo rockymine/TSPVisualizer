@@ -1,0 +1,31 @@
+﻿<div class="btn-group" role="group" style="width: 100%;">
+    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Jump First" @onclick="e => JumpFirst()">
+        Jump First
+    </button>
+</div>
+<div class="btn-group" role="group" style="width: 100%;">
+    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Reverse" @onclick="e => ReverseHistory()">
+    Reverse
+    </button>
+</div>
+@if (AppState.VisualSettings.AutoAdvance) {
+    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Pause" @onclick="e => AppState.VisualSettings.AutoAdvance = false">
+            Pause
+    </button>
+} else {
+    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Play" @onclick="e => AppState.VisualSettings.AutoAdvance = true">
+            Play
+    </button>
+}
+<div class="btn-group" role="group" style="width: 100%;">
+    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Advance" @onclick="e => AdvanceHistory()">
+        Advance
+    </button>
+</div>
+<div class="btn-group" role="group" style="width: 100%;">
+    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Jump Last" @onclick="e => JumpLast()">
+        Jump Last
+    </button>
+</div>

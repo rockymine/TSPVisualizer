@@ -8,13 +8,24 @@ public static class GraphUtil {
         maxNodes = Math.Min(maxNodes, maxX * maxY);
         var nodes = new List<Node>();
 
-        for (int i = 0; i < maxNodes; i++) {
-            Node node;
-            do {
-                node = RandomNode(i, maxX, maxY, random);
-            } while (GetClosestNode(nodes, node.Position).distance > 0.9);
+        // Create list of possible points
+        var candidates = PoissonDiskSampling.Sample2D(2f, 30, maxX, maxY, random);
+        var index = 0;
 
-            nodes.Add(node);
+        // Choose specified amount of nodes at random
+        while (maxNodes > 0 && candidates.Count > 0) {
+            var randomIndex = random.Next(candidates.Count);
+            var randomPosition = candidates[randomIndex];
+            candidates.RemoveAt(randomIndex);
+            
+            var newNode = new Node {
+                Index = index,
+                Position = randomPosition
+            };
+            
+            index++;
+            maxNodes--;
+            nodes.Add(newNode);
         }
 
         return new Graph(nodes, ConnectAllNodes(nodes));
@@ -63,5 +74,46 @@ public static class GraphUtil {
         }
 
         return edges;
+    }
+
+    public static Vector2 FindMin(IReadOnlyList<Node> nodes) {
+        var x = nodes.Min(n => n.Position.X);
+        var y = nodes.Min(n => n.Position.Y);
+        return new Vector2(x, y);
+    }
+
+    public static Vector2 FindMax(IReadOnlyList<Node> nodes) {
+        var x = nodes.Max(n => n.Position.X);
+        var y = nodes.Max(n => n.Position.Y);
+        return new Vector2(x, y);
+    }
+
+    public static GraphStateDifference ComputeStateDifference(GraphState? oldState, GraphState newState) {
+        if (oldState == null) {
+            return new GraphStateDifference(new HashSet<Edge>(NodeUtil.FindPathEdges(newState.Path)),
+                new List<Edge>(), new List<Edge>());
+        }
+
+        var inBoth = new HashSet<Edge>();
+        var onlyInOld = new List<Edge>();
+        var onlyInNew = new List<Edge>();
+
+        var oldStateEdges = NodeUtil.FindPathEdges(oldState.Path);
+        var newStateEdges = NodeUtil.FindPathEdges(newState.Path);
+
+        foreach (var edge in oldStateEdges) {
+            if (newStateEdges.Contains(edge)) {
+                inBoth.Add(edge);
+            } else {
+                onlyInOld.Add(edge);
+            }
+        }
+
+        foreach (var edge in newStateEdges) {
+            if (!inBoth.Contains(edge))
+                onlyInNew.Add(edge);
+        }
+
+        return new GraphStateDifference(inBoth, onlyInOld, onlyInNew);
     }
 }

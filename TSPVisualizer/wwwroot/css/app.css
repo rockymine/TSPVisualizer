@@ -1,0 +1,49 @@
+﻿.bg-custom-light {
+    background-color: #333333;
+}
+
+.custom-input-group {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.custom-column-style {
+    padding: 0;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.custom-hr {
+    margin: 0 1rem 0 1rem;
+    height: 2px !important;
+}
+
+.custom-hr-2 {
+    margin: 0 0.5rem 0 0.5rem;
+    height: 2px !important;
+}
+
+.modal-full-width {
+    margin: 1.75rem;
+    max-width: unset !important;
+}
+
+.word-break {
+    text-align: justify;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+.settings {
+    color: #4ec9b0;
+}
+
+.output {
+    color: #b8d7a3;
+}
+
+.header {
+    color: #a699e6;
+}

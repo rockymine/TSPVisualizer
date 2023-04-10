@@ -10,4 +10,6 @@ public class Node {
     public IReadOnlyList<Edge> Edges => _edges;
 
     public void AddEdge(Edge edge) => _edges.Add(edge);
+    public Edge EdgeTo(Node node) => _edges.Find(e => e.Node2 == node) 
+        ?? throw new InvalidOperationException();
 }

@@ -1,4 +1,6 @@
-﻿namespace TSPVisualizer.Core;
+﻿using System.Numerics;
+
+namespace TSPVisualizer.Core;
 
 public class Graph {
     private readonly List<Node> _nodes;
